@@ -1,0 +1,19 @@
+- name: Uninstall {{ application_name }}
+  hosts: "{{ target_hosts_master }}"
+  become: yes
+  become_method: sudo
+  order: sorted
+  serial: 1
+  tasks:
+     - name: Autoremove for {{ application_name }}
+       shell: apt autoremove -y --purge {{ application_name }}
+
+- name: Uninstall RabbitMQ in Slave
+  hosts: "{{ target_hosts_slave }}"
+  become: yes
+  become_method: sudo
+  order: sorted
+  serial: 1
+  tasks:
+     - name: Autoremove for {{ application_name }}
+       shell: apt autoremove -y --purge {{ application_name }}
